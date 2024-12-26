@@ -38,7 +38,7 @@ export default async function page() {
             </CardHeader>
         </Card>
         <Separator/>
-        <Button className="w-full" asChild>
+        <Button className="w-full font-bold" asChild>
             <Link href={"/"}>I'm done, Take me to the dashboard</Link>
         </Button>
         <div className="mt-8 ">
