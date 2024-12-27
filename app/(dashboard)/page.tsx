@@ -4,18 +4,19 @@ import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation';
 import React from 'react'
 import CreateTransactionDialog from './_components/CreateTransactionDialog';
+import Overview from './_components/Overview';
 
     async function page() {
         const user = await currentUser();
         if(!user) {
             redirect("/sign-up");
         }
-        const userSettings = prisma.userSettings.findUnique({
+        const userSetting = await prisma.userSettings.findUnique({
             where : {
                 userId : user.id
             }
         })
-        if(!userSettings) {
+        if(!userSetting) {
             redirect("/wizard");
         }
         return (
@@ -34,6 +35,7 @@ import CreateTransactionDialog from './_components/CreateTransactionDialog';
                         </div>
                     </div>
                 </div>
+                <Overview userSettings={userSetting}/>
             </div>
         )
 }
